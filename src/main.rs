@@ -52,7 +52,6 @@ fn part2() {
 3   9
 3   3";
     let a = f2(s);
-    let txt = include_str!(".././1.txt");
-    let b = f2(txt);
+    let b = f2(include_str!(".././1.txt"));
     println!("part2: {a} {b}");
 }
