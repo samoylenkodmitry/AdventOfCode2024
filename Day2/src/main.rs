@@ -1,3 +1,25 @@
+#![feature(test)]
+
+extern crate test;
+use std::{fs::File, io::Read};
+use test::Bencher;
+
+fn main() {
+    let mut f = File::open("./2.txt").expect("can't open file");
+    let mut s = String::new();
+    f.read_to_string(&mut s).expect("can't read");
+    let a = f1(s.as_str());
+    let b = f2(s.as_str());
+    println!("{a} {b}")
+}
+
+#[bench]
+fn bench(b: &mut Bencher) {
+    b.iter(|| {
+        main();
+    })
+}
+
 fn f1(s: &str) -> usize {
     s.lines()
         .filter(|l| {

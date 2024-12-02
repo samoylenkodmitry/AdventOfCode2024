@@ -1,3 +1,25 @@
+#![feature(test)]
+
+extern crate test;
+use std::{fs::File, io::Read};
+use test::Bencher;
+
+fn main() {
+    let mut f = File::open("./1.txt").expect("can't open file");
+    let mut s = String::new();
+    f.read_to_string(&mut s).expect("can't read");
+    let a = f1(s.as_str());
+    let b = f2(s.as_str());
+    println!("{a} {b}")
+}
+
+#[bench]
+fn bench(b: &mut Bencher) {
+    b.iter(|| {
+        main();
+    })
+}
+
 fn f1(s: &str) -> i32 {
     let (mut l, mut r) = parse(s);
     l.sort_unstable();
@@ -51,5 +73,5 @@ fn part2() {
 3   3";
     let a = f2(s);
     let b = f2(include_str!(".././1.txt"));
-    println!("day2 part2: {a} {b}");
+    println!("day1 part2: {a} {b}");
 }
