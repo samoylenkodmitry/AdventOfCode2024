@@ -38,7 +38,7 @@ fn part1() {
 3   3";
     let a = f1(s);
     let b = f1(include_str!(".././1.txt"));
-    println!("part1: {a} {b}");
+    println!("day1 part1: {a} {b}");
 }
 
 #[test]
@@ -51,5 +51,5 @@ fn part2() {
 3   3";
     let a = f2(s);
     let b = f2(include_str!(".././1.txt"));
-    println!("part2: {a} {b}");
+    println!("day2 part2: {a} {b}");
 }
