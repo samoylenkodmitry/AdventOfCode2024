@@ -97,6 +97,7 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX";
     let a = f1(s);
+    assert_eq!(a, 18);
     let b = f1(include_str!(".././4.txt"));
     println!("day4 part1: {a} {b}");
 }
@@ -114,6 +115,7 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX";
     let a = f2(s);
+    assert_eq!(a, 9);
     let b = f2(include_str!(".././4.txt"));
     println!("day4 part2: {a} {b}");
 }
