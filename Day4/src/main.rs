@@ -23,7 +23,6 @@ fn bench(b: &mut Bencher) {
 fn f1(s: &str) -> usize {
     let g: Vec<Vec<_>> = s.lines().map(|l| l.bytes().collect()).collect();
     let mut cnt = 0;
-    let mut j = 0usize;
     let p = [b'X', b'M', b'A', b'S', b'.'];
     let dxy = [
         (0, 1),
@@ -35,21 +34,21 @@ fn f1(s: &str) -> usize {
         (-1, 1),
         (1, -1),
     ];
-    let (ry, rx) = (0..g.len() as i32, 0..g[0].len() as i32);
-    for y in 0..g.len() as i32 {
-        for x in 0..g[0].len() as i32 {
-            if g[y as usize][x as usize] == b'X' {
+    for y in 0..g.len() {
+        for x in 0..g[0].len() {
+            if g[y][x] == b'X' {
                 for (dx, dy) in dxy {
-                    j = 0;
+                    let mut j = 0;
                     let (mut xx, mut yy) = (x, y);
-                    while j < 4
-                        && rx.contains(&xx)
-                        && ry.contains(&yy)
-                        && g[yy as usize][xx as usize] == p[j]
-                    {
-                        xx += dx;
-                        yy += dy;
-                        j += 1
+                    while j < 4 && g[yy][xx] == p[j] {
+                        j += 1;
+                        let x = xx as i32 + dx;
+                        let y = yy as i32 + dy;
+                        if x.min(y) < 0 || x >= g[0].len() as i32 || y >= g.len() as i32 {
+                            break;
+                        }
+                        xx = x as usize;
+                        yy = y as usize;
                     }
                     if j > 3 {
                         cnt += 1
@@ -64,34 +63,13 @@ fn f1(s: &str) -> usize {
 fn f2(s: &str) -> usize {
     let g: Vec<Vec<_>> = s.lines().map(|l| l.bytes().collect()).collect();
     let mut cnt = 0;
-    let (ry, rx) = (0..g.len() as i32, 0..g[0].len() as i32);
-    for y in 0..g.len() as i32 {
-        for x in 0..g[0].len() as i32 {
-            if g[y as usize][x as usize] == b'A' {
-                let (xx, yy) = (x + 1, y + 1);
-                let a = if rx.contains(&xx) && ry.contains(&yy) {
-                    g[yy as usize][xx as usize]
-                } else {
-                    b'.'
-                };
-                let (xx, yy) = (x - 1, y - 1);
-                let b = if rx.contains(&xx) && ry.contains(&yy) {
-                    g[yy as usize][xx as usize]
-                } else {
-                    b'.'
-                };
-                let (xx, yy) = (x + 1, y - 1);
-                let c = if rx.contains(&xx) && ry.contains(&yy) {
-                    g[yy as usize][xx as usize]
-                } else {
-                    b'.'
-                };
-                let (xx, yy) = (x - 1, y + 1);
-                let d = if rx.contains(&xx) && ry.contains(&yy) {
-                    g[yy as usize][xx as usize]
-                } else {
-                    b'.'
-                };
+    for y in 1..g.len() - 1 {
+        for x in 1..g[0].len() - 1 {
+            if g[y][x] == b'A' {
+                let a = g[y + 1][x + 1];
+                let b = g[y - 1][x - 1];
+                let c = g[y - 1][x + 1];
+                let d = g[y + 1][x - 1];
                 match [a, b, c, d] {
                     [b'M', b'S', b'M', b'S'] => cnt += 1,
                     [b'M', b'S', b'S', b'M'] => cnt += 1,
