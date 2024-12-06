@@ -16,7 +16,7 @@ fn main() {
 #[bench]
 fn bench(b: &mut Bencher) {
     b.iter(|| {
-        //        main();
+        main();
     })
 }
 
