@@ -13,3 +13,5 @@ Day 5 https://youtu.be/GVAzJ47PipA
 Day 6 https://youtu.be/wOn-hhz59To
 
 Day 7 https://youtu.be/-PchZnecU44
+
+Day 8 https://youtu.be/5OFniOpTL4g
