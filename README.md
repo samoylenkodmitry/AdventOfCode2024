@@ -21,3 +21,5 @@ Day 9 https://youtu.be/4Luu9gKjq68
 Day 10 https://youtu.be/BXZtvm_y3d4
 
 Day 11 https://youtu.be/_sxyv4E6Fpk
+
+Day 12 https://youtu.be/BQ-XKxvGigQ
