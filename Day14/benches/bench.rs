@@ -4,10 +4,11 @@ use std::fs::read_to_string;
 
 fn criterion_benchmark(c: &mut Criterion) {
     let input = read_to_string("./input.txt").expect("Could not read input file");
-    
-    c.bench_function("f1", |b| b.iter(|| f1(black_box(&input))));
-    c.bench_function("f2", |b| b.iter(|| f2(black_box(&input))));
+
+    c.bench_function("f1", |b| b.iter(|| f1(black_box(&input), 101, 103)));
+    c.bench_function("f2", |b| b.iter(|| f2(black_box(&input), 101, 103)));
 }
 
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
+

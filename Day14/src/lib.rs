@@ -34,11 +34,6 @@ pub fn f1(s: &str, w: i64, h: i64) -> i64 {
         if qx < 3 && qy < 3 {
             q[qy * 2 + qx] += 1;
         }
-
-        //println!(
-        //    "{x} {y} {vx} {vy} : {x1} {y1}, {qx} {qy}, q={}",
-        //    qy * 2 + qx
-        //);
     }
     q[0] * q[1] * q[2] * q[3]
 }
@@ -57,8 +52,6 @@ pub fn f2(s: &str, w: i64, h: i64) -> i64 {
         })
         .collect();
 
-    let mut set = HashSet::new();
-    let mut cycle = 0;
     let mut res = 0;
     for steps in 1..10_000 {
         let mut g = [[' '; 101]; 103];
@@ -67,37 +60,24 @@ pub fn f2(s: &str, w: i64, h: i64) -> i64 {
             let y1 = (h + (y + vy * steps) % h) % h;
             g[y1 as usize][x1 as usize] = '#';
         }
-        /*
-                let good = g
-                    .iter()
-                    .any(|row| row[..].windows(6).any(|w| w.iter().all(|&c| c == '.')));
-        */
         let good =
             (0..w as usize).any(|x| (0..h as usize).filter(|&y| g[y][x] == '#').count() > 34);
         if !good {
             continue;
         }
-        for i in 0..10 {
-            println!("----{steps}----");
-        }
-        for y in 0..h as usize {
-            for x in 0..w as usize {
-                print!("{}", g[y][x]);
-            }
-            println!();
-        }
-        println!("---------");
+        /*
+                println!("----{steps}----");
+                for y in 0..h as usize {
+                    for x in 0..w as usize {
+                        print!("{}", g[y][x]);
+                    }
+                    println!();
+                }
+        */
 
         if good {
             res = steps;
             break;
-        }
-        if !set.insert(g) {
-            cycle += 1;
-            println!("cycle in {steps} step");
-            if cycle > 0 {
-                break;
-            }
         }
     }
     res
@@ -107,7 +87,7 @@ pub fn f2(s: &str, w: i64, h: i64) -> i64 {
 mod tests {
     use super::*;
 
-    //#[test]
+    #[test]
     fn part1() {
         let a = "p=0,4 v=3,-3
 p=6,3 v=-1,-3
