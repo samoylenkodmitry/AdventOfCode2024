@@ -11,7 +11,6 @@ pub fn f1(s: &str) -> i64 {
         .expect("must have @ symbol");
     let (ry, rx) = (0..g.len() as i64, 0..g[0].len() as i64);
     for c in cmds.bytes() {
-        //println!("cmd:{c} cy,cx: {cy},{cx}");
         let (dx, dy) = match c {
             b'^' => (0, -1),
             b'>' => (1, 0),
@@ -27,29 +26,17 @@ pub fn f1(s: &str) -> i64 {
             }
             (y, x) = (y + dy, x + dx);
             if v == b'.' {
-                //println!("found spot y={y} x={x}, breaking");
                 break;
             }
         }
         if g[y as usize][x as usize] == b'.' {
             while y != cy || x != cx {
-                //println!("moving...");
                 g[y as usize][x as usize] = g[(y - dy) as usize][(x - dx) as usize];
                 (y, x) = (y - dy, x - dx);
             }
             g[y as usize][x as usize] = b'.';
             (cy, cx) = (cy + dy, cx + dx);
-            //println!("new pos: cy, cx: {cy} {cx}");
         }
-        //println!("cmd={c}, dx,dy=`{dx}`, `{dy}`");
-        /*
-                for y in 0..g.len() as i64 {
-                    for x in 0..g[0].len() as i64 {
-                        print!("{}", g[y as usize][x as usize] as char);
-                    }
-                    println!();
-                }
-        */
     }
     let mut res = 0;
     for y in 0..g.len() as i64 {
@@ -87,7 +74,6 @@ pub fn f2(s: &str) -> i64 {
     let (ry, rx) = (0..g.len() as i64, 0..g[0].len() as i64);
     for c in cmds.bytes() {
         let before = g.clone();
-        //println!("cmd:{c} cy,cx: {cy},{cx}");
         let (dx, dy) = match c {
             b'^' => (0, -1),
             b'>' => (1, 0),
@@ -136,17 +122,6 @@ pub fn f2(s: &str) -> i64 {
                 if !all_good {
                     panic!("at the end layer all chars are '.'")
                 }
-                /*
-                                if layers.len() > 2 {
-                                    println!("before");
-                                    for y in 0..g.len() as i64 {
-                                        for x in 0..g[0].len() as i64 {
-                                            print!("{}", g[y as usize][x as usize] as char);
-                                        }
-                                        println!();
-                                    }
-                                }
-                */
                 for i in (0..layers.len() - 1).rev() {
                     for &(y, x) in &layers[i] {
                         if g[(y + dy) as usize][x as usize] == b'.' {
@@ -167,21 +142,6 @@ pub fn f2(s: &str) -> i64 {
                 }
                 g[cy as usize][cx as usize] = b'.';
                 cy += dy;
-
-                if layers.len() > 2 {
-                    /*
-                                        for y in 0..g.len() as i64 {
-                                            for x in 0..g[0].len() as i64 {
-                                                print!("{}", g[y as usize][x as usize] as char);
-                                            }
-                                            println!();
-                                        }
-                                        for x in layers {
-                                            println!("layer: {:?}", x);
-                                        }
-                    */
-                    //panic!("look :)");
-                }
             }
         } else if c == b'v' {
         } else {
@@ -205,7 +165,6 @@ pub fn f2(s: &str) -> i64 {
                 (cy, cx) = (cy + dy, cx + dx);
             }
         }
-        //       println!("cmd={c}, dx,dy=`{dx}`, `{dy}`");
         let mut c1 = 0;
         let mut c2 = 0;
         for y in 0..g.len() as i64 {
@@ -223,9 +182,7 @@ pub fn f2(s: &str) -> i64 {
                         panic!("invalid");
                     }
                 }
-                //              print!("{}", g[y as usize][x as usize] as char);
             }
-            //          println!();
         }
         if c1 != cnt || c2 != cnt {
             println!("cmd:{c} cy,cx: {cy},{cx}");
@@ -261,7 +218,7 @@ pub fn f2(s: &str) -> i64 {
 mod tests {
     use super::*;
 
-    //#[test]
+    #[test]
     fn part1() {
         let b = "########
 #..O.O.#
