@@ -33,3 +33,7 @@ Day 15 https://youtu.be/cnT91-9G5Gg
 Day 16 https://youtu.be/b8z6LDeIDgw
 
 Day 16 https://youtu.be/QDtBTBLitYk
+
+Day 17 https://youtu.be/VTQCaA08Lic
+
+
