@@ -36,4 +36,4 @@ Day 16 https://youtu.be/QDtBTBLitYk
 
 Day 17 https://youtu.be/VTQCaA08Lic
 
-
+Day 19 https://youtu.be/DFH8TT8Ns5g
