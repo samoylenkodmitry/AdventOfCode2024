@@ -50,6 +50,7 @@ pub fn f1(s: &str) -> u64 {
     res.iter().fold(0, |r, &t| r * 2 + t as u64)
 }
 
+// credit: https://github.com/vaisest/aoc-2024/blob/master/src/solvers/day24.rs
 pub fn f2(s: &str) -> String {
     let (init, conn) = s.split_once("\n\n").expect("should have an empty line");
     let mut wire_map: HashMap<&str, Vec<(&str, &str)>> = HashMap::default();

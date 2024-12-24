@@ -45,3 +45,5 @@ Day 21 don't ask me where is it...
 Day 22 https://youtu.be/Ey4clwlLe4E
 
 Day 23 https://youtu.be/clMYBOmUC9s
+
+Day 24 https://youtu.be/99o8RifZ33Y
